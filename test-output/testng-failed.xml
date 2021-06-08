@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [All Test Suite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="E:/Abhisek/PROJECTS/Selenium/seleniumeasy-automation(failed)">
+    <parameter name="browser" value="chrome"/>
+    <classes>
+      <class name="testcases.InputForms">
+        <methods>
+          <include name="beforeMethodPageObjects"/>
+          <include name="openBrowser"/>
+          <include name="exitBrowser"/>
+          <include name="navigateToUrl"/>
+          <include name="checkboxDemo"/>
+        </methods>
+      </class> <!-- testcases.InputForms -->
+    </classes>
+  </test> <!-- E:/Abhisek/PROJECTS/Selenium/seleniumeasy-automation(failed) -->
+</suite> <!-- Failed suite [All Test Suite] -->
