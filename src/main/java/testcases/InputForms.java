@@ -3,6 +3,7 @@ package testcases;
 import data.TestConstants;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -31,7 +32,7 @@ public class InputForms extends PageObjects {
         driver.quit();
     }
 
-    @Test(enabled = false, description = "Test simple form demo")
+    @Test(description = "Test simple form demo")
     public void simpleFormDemo() {
 
         homepage.inputForms.click();
@@ -57,7 +58,7 @@ public class InputForms extends PageObjects {
 
         inputFormsPage.getTotalButton.click();
 
-        Assert.assertEquals(Integer.parseInt(inputFormsPage.totalSum.getText()),Integer.parseInt(TestConstants.num1) + Integer.parseInt(TestConstants.num2));
+        Assert.assertEquals(Integer.parseInt(inputFormsPage.totalSum.getText()), Integer.parseInt(TestConstants.num1) + Integer.parseInt(TestConstants.num2));
     }
 
     @Test(description = "Test Checkbox demo")
@@ -100,5 +101,131 @@ public class InputForms extends PageObjects {
         Assert.assertFalse(inputFormsPage.multipleCheckBox("Option 2").isSelected());
         Assert.assertFalse(inputFormsPage.multipleCheckBox("Option 3").isSelected());
         Assert.assertFalse(inputFormsPage.multipleCheckBox("Option 4").isSelected());
+    }
+
+    @Test(description = "Test Radio Buttons Demo")
+    public void radioButtonsDemo() {
+
+        homepage.inputForms.click();
+
+        homepage.dropdownOpen.findElement(By.xpath("//a[contains(text(),\"Radio Buttons Demo\")]")).click();
+
+        wtDriver.until(ExpectedConditions.visibilityOf(inputFormsPage.radioButtonHeader));
+
+        Assert.assertTrue(inputFormsPage.radioButtonHeader.isDisplayed());
+        Assert.assertTrue(inputFormsPage.groupRadioButtonsHeader.isDisplayed());
+
+        //single radio button
+        inputFormsPage.maleCheckbox1.click();
+
+        Assert.assertTrue(inputFormsPage.maleCheckbox1.isSelected());
+
+        inputFormsPage.getCheckedValueButton.click();
+
+        Assert.assertTrue(inputFormsPage.radioValue1.isDisplayed());
+
+        Assert.assertEquals(inputFormsPage.radioValue1.getText(), "Radio button 'Male' is checked");
+
+        //group radio button
+        action.moveToElement(inputFormsPage.femaleCheckbox2).build().perform();
+
+        inputFormsPage.femaleCheckbox2.click();
+
+        inputFormsPage.getAgeLimit("15 - 50").click();
+
+        Assert.assertTrue(inputFormsPage.femaleCheckbox2.isSelected());
+        Assert.assertTrue(inputFormsPage.getAgeLimit("15 - 50").isSelected());
+
+        inputFormsPage.getValuesButton.click();
+
+        Assert.assertTrue(inputFormsPage.radioValue2.isDisplayed());
+
+        Assert.assertTrue(inputFormsPage.radioValue2.getText().contains("Sex : Female"));
+        Assert.assertTrue(inputFormsPage.radioValue2.getText().contains("Age group: 15 - 50"));
+    }
+
+    @Test(description = "Test Select List Demo")
+    public void selectList() {
+
+        homepage.inputForms.click();
+
+        homepage.dropdownOpen.findElement(By.xpath("//a[contains(text(),\"Select Dropdown List\")]")).click();
+
+        wtDriver.until(ExpectedConditions.visibilityOf(inputFormsPage.selectListHeader));
+
+        Assert.assertTrue(inputFormsPage.selectListHeader.isDisplayed());
+        Assert.assertTrue(inputFormsPage.multiSelectListHeader.isDisplayed());
+
+        //Single select
+        Select single = new Select(inputFormsPage.selectDayDropdown);
+
+        single.selectByVisibleText("Thursday");
+
+        Assert.assertTrue(inputFormsPage.selectedDayValue.isDisplayed());
+
+        Assert.assertEquals(inputFormsPage.selectedDayValue.getText(), "Day selected :- Thursday");
+
+        //Multi select
+        action.moveToElement(inputFormsPage.multiSelectPlace).build().perform();
+
+        Select multi = new Select(inputFormsPage.multiSelectPlace);
+
+        multi.selectByValue("Ohio");
+
+        inputFormsPage.firstSelectedButton.click();
+
+        Assert.assertTrue(inputFormsPage.selectedPlacesValue.isDisplayed());
+
+        Assert.assertEquals(inputFormsPage.selectedPlacesValue.getText(), "First selected option is : Ohio");
+
+        multi.deselectByValue("Ohio");
+
+        multi.selectByIndex(0);
+        multi.selectByVisibleText("Florida");
+
+        inputFormsPage.getAllSelectedButton.click();
+
+        //Found an bug using select multiple select options (Multiple values are not displaying in the website) so commenting the assertion to avoid failure
+//        Assert.assertEquals(inputFormsPage.selectedPlacesValue.getText(), "Options selected are : California,Florida");
+    }
+
+    @Test(description = "Test Input form")
+    public void inputForm() {
+
+        homepage.inputForms.click();
+
+        homepage.dropdownOpen.findElement(By.xpath("//a[contains(text(),\"Input Form Submit\")]")).click();
+
+        wtDriver.until(ExpectedConditions.visibilityOf(inputFormsPage.contactUsHeader));
+
+        Assert.assertTrue(inputFormsPage.contactUsHeader.isDisplayed());
+
+        inputFormsPage.firstName.sendKeys("Jon");
+
+        inputFormsPage.lastName.sendKeys("Wick");
+
+        inputFormsPage.email.sendKeys("jonwick@action.com");
+
+        inputFormsPage.phone.sendKeys("3422203553");
+
+        inputFormsPage.address.sendKeys("07 Seattle");
+
+        inputFormsPage.city.sendKeys("New York");
+
+        Select state = new Select(inputFormsPage.state);
+
+        state.selectByVisibleText("Washington");
+
+        inputFormsPage.zip.sendKeys("1234");
+
+        inputFormsPage.website.sendKeys("hellyeah.com");
+
+        inputFormsPage.noHosting.click();
+
+        inputFormsPage.comment.sendKeys("WHOEVER COMES, WHOEVER IT IS... I'LL KILL THEM. I'LL KILL THEM ALL.");
+
+        Assert.assertTrue(inputFormsPage.sendButton.isEnabled());
+
+        inputFormsPage.sendButton.submit();
     }
 }

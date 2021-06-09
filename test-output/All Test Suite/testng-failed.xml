@@ -6,11 +6,11 @@
     <classes>
       <class name="testcases.InputForms">
         <methods>
+          <include name="inputForm"/>
           <include name="beforeMethodPageObjects"/>
           <include name="openBrowser"/>
           <include name="exitBrowser"/>
           <include name="navigateToUrl"/>
-          <include name="checkboxDemo"/>
         </methods>
       </class> <!-- testcases.InputForms -->
     </classes>
