@@ -4,7 +4,11 @@
     <test verbose="2" preserve-order="true" name="E:/Abhisek/PROJECTS/Selenium/seleniumeasy-automation">
         <parameter name="browser" value="chrome"/>
         <classes>
-            <class name="testcases.InputForms"> </class>
+            <class name="testcases.DatePickers">
+                <methods>
+                    <include name="bootStrapDatePicker"/>
+                </methods>
+            </class>
         </classes>
     </test>
 </suite>

@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+
 public class InputFormsPage {
 
     WebDriver driver;
@@ -157,6 +159,73 @@ public class InputFormsPage {
 
     @FindBy(xpath = "//button[text()=\"Send \"]")
     public WebElement sendButton;
+
+    //Ajax form
+    @FindBy(xpath = "//div[@class=\"panel-heading\"][contains(text(),\"Ajax Form\")]")
+    public WebElement ajaxFormHeader;
+
+    @FindBy(name = "title")
+    public WebElement ajaxName;
+
+    @FindBy(id = "description")
+    public WebElement ajaxComment;
+
+    @FindBy(id = "btn-submit")
+    public WebElement ajaxSubmit;
+
+    @FindBy(css = "img[src=\"LoaderIcon.gif\"]")
+    public WebElement ajaxLoaderIcon;
+
+    @FindBy(id = "submit-control")
+    public WebElement ajaxSubmitMessage;
+
+    //JQuery dropdown
+    @FindBy(xpath = "//h3[@class=\"panel-title\"][contains(text(),\"Drop Down with Search box\")]")
+    public WebElement searchBoxHeader;
+
+    @FindBy(xpath = "//h3[@class=\"panel-title\"][contains(text(),\" Select Multiple Values\")]")
+    public WebElement multipleValuesHeader;
+
+    @FindBy(xpath = "//h3[@class=\"panel-title\"][contains(text(),\"Drop Down with Disabled values\")]")
+    public WebElement disabledValuesHeader;
+
+    @FindBy(xpath = "//h3[@class=\"panel-title\"][contains(text(),\"Drop-down with Category related options\")]")
+    public WebElement categoryHeader;
+
+    @FindBy(xpath = "//span[@id=\"select2-country-container\"]//parent::span")
+    public WebElement selectCountry;
+
+    @FindBy(css = ".select2-search--dropdown .select2-search__field")
+    public WebElement searchCountry;
+
+    @FindBy(xpath = "//ul[@id=\"select2-country-results\"]//li[contains(@class,\"select2-results__option\")][contains(text(),\"India\")]")
+    public WebElement india;
+
+    @FindBy(id = "select2-country-container")
+    public WebElement selectedCountryValue;
+
+    @FindBy(css = ".select2-selection--multiple")
+    public WebElement selectState;
+
+    public WebElement selectStateFromList(String state) {
+        return driver.findElement(By.xpath("//ul[@class=\"select2-results__options\"]//li[@class=\"select2-results__option\"][contains(text(),\"" + state + "\")]"));
+    }
+
+    @FindBy(css = ".select2-selection__choice")
+    public List<WebElement> selectedStateValues;
+
+    @FindBy(xpath = "//label[text()=\"Select US Outlying Territories :\"]//following-sibling::span[contains(@class,\"select2-container\")]")
+    public WebElement disabledDropdown;
+
+    public WebElement selectTerritory(String territory) {
+        return driver.findElement(By.xpath("//span[@class=\"select2-results\"]//li[@class=\"select2-results__option\"][contains(text(),\"" + territory + "\")]"));
+    }
+
+    @FindBy(css = "[title=\"Puerto Rico\"]")
+    public WebElement puertoRico;
+
+    @FindBy(id = "files")
+    public WebElement files;
 
     public InputFormsPage(WebDriver driver) {
         this.driver = driver;

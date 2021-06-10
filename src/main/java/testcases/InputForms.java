@@ -228,4 +228,86 @@ public class InputForms extends PageObjects {
 
         inputFormsPage.sendButton.submit();
     }
+
+    @Test(description = "Test Ajax form")
+    public void ajaxForm() {
+
+        homepage.inputForms.click();
+
+        homepage.dropdownOpen.findElement(By.xpath("//a[contains(text(),\"Ajax Form Submit\")]")).click();
+
+        wtDriver.until(ExpectedConditions.visibilityOf(inputFormsPage.ajaxFormHeader));
+
+        Assert.assertTrue(inputFormsPage.ajaxFormHeader.isDisplayed());
+
+        inputFormsPage.ajaxName.sendKeys("Bruce Wayne");
+
+        inputFormsPage.ajaxComment.sendKeys("I am Batman!");
+
+        action.moveToElement(inputFormsPage.ajaxSubmit).build().perform();
+
+        inputFormsPage.ajaxSubmit.click();
+
+        wtDriver.until(ExpectedConditions.visibilityOf(inputFormsPage.ajaxLoaderIcon));
+
+        Assert.assertTrue(inputFormsPage.ajaxLoaderIcon.isDisplayed());
+
+        Assert.assertTrue(inputFormsPage.ajaxSubmitMessage.isDisplayed());
+
+        Assert.assertEquals(inputFormsPage.ajaxSubmitMessage.getText(), "Ajax Request is Processing!");
+
+        wtDriver.until(ExpectedConditions.textToBePresentInElement(inputFormsPage.ajaxSubmitMessage, "Form submited Successfully!"));
+    }
+
+    @Test(description = "Test JQuery select dropdown")
+    public void jQueryDropdown() {
+
+        homepage.inputForms.click();
+
+        homepage.dropdownOpen.findElement(By.xpath("//a[contains(text(),\"JQuery Select dropdown\")]")).click();
+
+        wtDriver.until(ExpectedConditions.visibilityOf(inputFormsPage.searchBoxHeader));
+
+        Assert.assertTrue(inputFormsPage.searchBoxHeader.isDisplayed());
+        Assert.assertTrue(inputFormsPage.multipleValuesHeader.isDisplayed());
+        Assert.assertTrue(inputFormsPage.disabledValuesHeader.isDisplayed());
+        Assert.assertTrue(inputFormsPage.categoryHeader.isDisplayed());
+
+        //Single select
+        inputFormsPage.selectCountry.click();
+
+        wtDriver.until(ExpectedConditions.visibilityOf(inputFormsPage.searchCountry));
+
+        inputFormsPage.searchCountry.sendKeys("India");
+
+        inputFormsPage.india.click();
+
+        Assert.assertEquals(inputFormsPage.selectedCountryValue.getText(), "India");
+
+        //Multi select
+        inputFormsPage.selectState.click();
+        inputFormsPage.selectStateFromList("Alaska").click();
+
+        inputFormsPage.selectState.click();
+        inputFormsPage.selectStateFromList("Arizona").click();
+
+        Assert.assertEquals(inputFormsPage.selectedStateValues.get(0).getText(), "×Alaska");
+        Assert.assertEquals(inputFormsPage.selectedStateValues.get(1).getText(), "×Arizona");
+
+        //Disabled values
+        action.moveToElement(inputFormsPage.disabledValuesHeader).build().perform();
+
+        inputFormsPage.disabledDropdown.click();
+
+        inputFormsPage.selectTerritory("Puerto Rico").click();
+
+        Assert.assertTrue(inputFormsPage.puertoRico.isDisplayed());
+
+        //Select Category
+        action.moveToElement(inputFormsPage.categoryHeader).build().perform();
+
+        Select file = new Select(inputFormsPage.files);
+
+        file.selectByVisibleText("Java");
+    }
 }

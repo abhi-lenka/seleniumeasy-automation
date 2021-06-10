@@ -8,6 +8,7 @@ public class PageObjects extends BaseUtils{
 
     protected Homepage homepage;
     protected InputFormsPage inputFormsPage;
+    protected DatePickersPage datePickersPage;
 
     @BeforeClass
     @BeforeMethod
@@ -18,5 +19,6 @@ public class PageObjects extends BaseUtils{
 
         homepage = new Homepage(driver);
         inputFormsPage = new InputFormsPage(driver);
+        datePickersPage = new DatePickersPage(driver);
     }
 }

@@ -66,6 +66,9 @@ public class Homepage {
     @FindBy(xpath = "//div[@id=\"navbar-brand-centered\"]//a[contains(text(),\"Input Forms\")]")
     public WebElement inputForms;
 
+    @FindBy(xpath = "//*[@id=\"navbar-brand-centered\"]/ul[1]/li[2]/a")
+    public WebElement datePickers;
+
     @FindBy(css = ".dropdown.open .dropdown-menu")
     public WebElement dropdownOpen;
 
