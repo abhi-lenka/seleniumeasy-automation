@@ -4,15 +4,15 @@
   <test thread-count="5" name="E:/Abhisek/PROJECTS/Selenium/seleniumeasy-automation(failed)">
     <parameter name="browser" value="chrome"/>
     <classes>
-      <class name="testcases.DatePickers">
+      <class name="testcases.AlertsAndModals">
         <methods>
-          <include name="exitBrowser"/>
-          <include name="beforeMethodPageObjects"/>
-          <include name="bootStrapDatePicker"/>
           <include name="navigateToUrl"/>
+          <include name="beforeMethodPageObjects"/>
+          <include name="windowPopUp"/>
+          <include name="exitBrowser"/>
           <include name="openBrowser"/>
         </methods>
-      </class> <!-- testcases.DatePickers -->
+      </class> <!-- testcases.AlertsAndModals -->
     </classes>
   </test> <!-- E:/Abhisek/PROJECTS/Selenium/seleniumeasy-automation(failed) -->
 </suite> <!-- Failed suite [All Test Suite] -->

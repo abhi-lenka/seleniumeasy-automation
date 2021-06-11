@@ -69,6 +69,12 @@ public class Homepage {
     @FindBy(xpath = "//*[@id=\"navbar-brand-centered\"]/ul[1]/li[2]/a")
     public WebElement datePickers;
 
+    @FindBy(xpath = "//div[@id=\"navbar-brand-centered\"]//a[contains(text(),\"Progress Bars\")]")
+    public WebElement progressBars;
+
+    @FindBy(xpath = "//div[@id=\"navbar-brand-centered\"]//a[contains(text(),\"Alerts & Modals\")]")
+    public WebElement alertModalBars;
+
     @FindBy(css = ".dropdown.open .dropdown-menu")
     public WebElement dropdownOpen;
 

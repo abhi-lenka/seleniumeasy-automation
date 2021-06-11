@@ -17,5 +17,4 @@ public class TestConstants {
     public static String RandomStringValue = RandomStringUtils.randomAlphabetic(10);
     public static String num1 = RandomStringUtils.randomNumeric(2);
     public static String num2 = RandomStringUtils.randomNumeric(2);
-
 }

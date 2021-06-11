@@ -4,9 +4,9 @@
     <test verbose="2" preserve-order="true" name="E:/Abhisek/PROJECTS/Selenium/seleniumeasy-automation">
         <parameter name="browser" value="chrome"/>
         <classes>
-            <class name="testcases.DatePickers">
+            <class name="testcases.AlertsAndModals">
                 <methods>
-                    <include name="bootStrapDatePicker"/>
+                    <include name="windowPopUp"/>
                 </methods>
             </class>
         </classes>
