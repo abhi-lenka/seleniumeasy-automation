@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="All Test Suite">
-    <test verbose="2" preserve-order="true" name="E:/Abhisek/PROJECTS/Selenium/seleniumeasy-automation">
+    <test verbose="2" preserve-order="true" name="seleniumeasy-automation">
         <parameter name="browser" value="chrome"/>
         <classes>
-            <class name="testcases.AlertsAndModals">
-                <methods>
-                    <include name="windowPopUp"/>
-                </methods>
-            </class>
+            <class name="testcases.navigateToSite"/>
+            <class name="testcases.AlertsAndModals"/>
+            <class name="testcases.DatePickers"/>
+            <class name="testcases.InputForms"/>
+            <class name="testcases.ProgressBar"/>
         </classes>
     </test>
 </suite>
